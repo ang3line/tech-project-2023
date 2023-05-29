@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="id.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>id page </title>
+
+<style> 
+body{ text-align: center;}
+input{ width: 120px;}
+.search { color: rgb(202, 226, 246);}
+.findB { border-radius: 12px;}
+.Btn {border-radius: 12px; background-color: transparent; color: aliceblue; border-color: aliceblue; padding: 5px;}
+    
+</style>
+
+
+</head>
+<body>
+    <br> 
+    <div id="enterDetails"> 
+        <h1> sign in </h1>
+        <h4> ID number </h4>
+        <input id="EnterID" type="text"> 
+
+        <h4> name </h4>
+        <input id="EnterName" type="text"> 
+
+        <h4> password  </h4>
+        <input id="EnterPassword" type="text">  <br><br> <br> 
+    
+        <button id="insert" class="Btn">insert</button>
+        <button id="update" class="Btn">update</button>
+        <button id="remove" class="Btn">remove</button>
+    
+ 
+    </div>
+<br> <br> 
+    <div id="findDetails" class="search">
+        <h1> search </h1> 
+        <h4> ID </h4>
+        <input id="findID" type="text"> <br> <br> 
+
+        <button id="find" class="Btn">find</button>
+        <button id="Find2">Find2</button>
+
+        <h3 id="FindName" type="text"></h3>
+        <h3 id="FindPassword" type="text"> </h3> <br> <br> 
+
+         
+    </div>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyC1o0qt4QG-CZtU-1d3ZhimFGVajbs43Wo",
+          authDomain: "cosmic-crusade-59751.firebaseapp.com",
+          databaseURL: "https://cosmic-crusade-59751-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "cosmic-crusade-59751",
+          storageBucket: "cosmic-crusade-59751.appspot.com",
+          messagingSenderId: "332229158266",
+          appId: "1:332229158266:web:a7f48c187c04f29e4162c3",
+          measurementId: "G-24HWDV998Y"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        import {getDatabase, set, get, update,remove, ref, child}
+        from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js"
+
+        const db = getDatabase();
+
+        var EnterID = document.querySelector("#EnterID");
+        var EnterName = document.querySelector("#EnterName");
+        var EnterPassword = document.querySelector("#EnterPassword");
+        var findID = document.querySelector("#findID");
+        var FindName = document.querySelector("#FindName");
+        var FindPassword = document.querySelector("#FindPassword");
+
+
+        var insertBtn = document.querySelector("#insert"); 
+        var updateBtn = document.querySelector("#update");
+        var removeBtn = document.querySelector("#remove");
+        var findBtn = document.querySelector("#find");
+        var find2Btn = document.querySelector("Find2")
+
+
+        function InsertData(){
+            set(ref(db, "people/" + enterID.value ), {
+                Name: EnterName.value,
+                ID: EnterID.value,
+                Password: EnterPassword.value, 
+            })
+
+            .then (() => { 
+                alert(" Data Added! ")
+
+             })
+             .catch ((error)=> { 
+                alert("error!")
+             })
+    
+            }
+
+        function FindData() {
+            alert("working");
+            const dbref = ref(db);
+
+            get(child(dbref, "people/" + findID.value))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    FindName.innerHTML = "Name: " + snapshot.val().Name;
+                    FindPassword.innerHTML = "password: " + snapshot.val().Password;
+                } else {
+                    alert("No data found");
+                }
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+    
+            function testFunc() {
+                alert("Test")
+            }
+}
+
+        function UpdateData(){
+            
+        }
+
+        function RemoveData(){
+            
+        }
+
+        insertBtn.addEventListener('click', InsertData);
+        updateBtn.addEventListener('click', UpdateData);
+        removetBtn.addEventListener('click', RemoveData);
+        findBtn.addEventListener('click', FindData);
+        find2Btn.addEventListener('click', testFunc())
+
+
+
+      </script>
+    
+
+</body>
+</html>
