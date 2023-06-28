@@ -54,15 +54,17 @@
         <h4>ID</h4> 
         <input id="enterID" type="text" placeholder="enter ID"> 
 
+        <br> <br> <br> 
+
         <h4>username</h4> 
         <input id="enterName" type="text" placeholder="username"> 
 
-        <h4>Age</h4> 
-        <input id="enterAge" type="text" placeholder="age"> <br><br> <br> 
-
+        <br> <br> <br> <br> 
+        
         <button id="insert" class="btn">insert</button>
         <button id="update" class="btn">update</button>
-        <button id="remove" class="btn">remove</button> <br><br>
+        <button id="remove" class="btn">remove</button> 
+
     </div>
 
     <div id="findDetails">
@@ -71,7 +73,7 @@
         <input id="findID" type="text"> <br><br>
         <button id="find" class="btn">find</button>
         <h3 id="findName" type="text"></h3>
-        <h3 id="findAge" type="number"></h3> <br><br>
+        
     </div>
     
     <script type="module">
@@ -114,10 +116,10 @@
             set(ref(db, "People/"+ enterID.value),{
                 Name: enterName.value,
                 ID: enterID.value,
-                Age: enterAge.value
+               
             })
             .then(()=>{
-                alert("Data added successfully");
+                alert("Your account has been created! Welcome to Cosmic Crusade");
             })
             .catch((error)=>{
                 alert(error);
@@ -131,7 +133,7 @@
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     findName.innerHTML = "Name: " + snapshot.val().Name;
-                    findAge.innerHTML = "Age: " + snapshot.val().Age;
+                    
                 } else {
                     alert("No data found");
                 }
@@ -145,7 +147,7 @@
         function UpdateData(){
             update(ref(db, "People/"+ enterID.value),{
                 Name: enterName.value,
-                Age: enterAge.value
+               
             })
             .then(()=>{
                 alert("Data updated successfully");
