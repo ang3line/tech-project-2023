@@ -21,7 +21,7 @@ function jump() {
       .getPropertyValue('left'));
     score.innerText++;
   
-    if (rockLeft < 0) {
+    if (rockLeft < 1) {
       rock.style.display = 'none';
     } else {
       rock.style.display = ''
@@ -29,7 +29,7 @@ function jump() {
   
     if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
       alert("You got a score of: " + score.innerText +
-        "\n\nreplay?");
+        " replay?");
       location.reload();
     }
   }, 50);

@@ -8,7 +8,11 @@ let scaleRatio = null ;
 
 function setScreen(){ 
     scaleRatio = getScaleRatio();
+    canvas.width = GAME_WIDTH * scaleRatio 
+    canvas.height = GAME_HEIGHT * scaleRatio 
 }
+
+setScreen();
 
 function getScaleRatio(){ 
     const screenHeight = Math.min( 
@@ -20,4 +24,12 @@ function getScaleRatio(){
     window.innerWidth, 
     document.documentElement.clientWidth
     );
+
+}
+
+if(screenWidth/ screenHeight < GAME_WIDTH/ GAME_HEIGHT){ 
+    return screenWidth/ GAME_WIDTH
+}
+else{ 
+    return screenHeight / GAME_HEIGHT 
 }
