@@ -1,6 +1,7 @@
 const ship = document.getElementById('ship');
 const rock = document.getElementById('rock');
 const score = document.getElementById('score');
+// Const for varibles for defining objects and things that won't be changed . 
 
 function jump() {
     ship.classList.add("jump-animation");
@@ -8,11 +9,11 @@ function jump() {
       ship.classList.remove("jump-animation"), 500);
   }
   
-  document.addEventListener('keypress', (event) => {
-    if (!ship.classList.contains('jump-animation')) {
+  document.addEventListener('keydown', (event) => {
+    if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation')) {
       jump();
     }
-  })
+  });
   
   setInterval(() => {
     const shipTop = parseInt(window.getComputedStyle(ship)

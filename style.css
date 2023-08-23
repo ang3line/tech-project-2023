@@ -6,7 +6,12 @@ body {background-color: #042848;
         
     }
     #game {
-        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        width: 800px;
         height: 300px;
         border: 2px solid rgb(255, 255, 255);
         margin: auto;
@@ -35,7 +40,7 @@ body {background-color: #042848;
       }
       
       @keyframes rock {
-        0%{left: 550px;}
+        0%{left: 750px;}
         100%{left: -50px;}
       }
       
@@ -49,4 +54,5 @@ body {background-color: #042848;
         75%{top: 75px;}
         100%{top: 225px;}
       }
+      /*the key frames at the times where the person jumps */
     
