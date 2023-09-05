@@ -95,7 +95,7 @@
 
         <br> <br> <br> <br> 
         
-        <button id="insert" class="btn">insert</button>
+        <button id="insert" class="btn">create</button>
         <button id="update" class="btn">update</button>
         <button id="remove" class="btn">remove</button> 
 
@@ -154,10 +154,21 @@
         var findBtn = document.querySelector("#find")
 
         function InsertData() {
-            set(ref(db, "People/"+ enterID.value),{
+
+            const dbref = ref(db); 
+            get(child(dbref, "People/" + enterID.value))
+
+            .then((snapshot) => {
+
+                window.storeId = enterID.value;
+                if(snapshot.exists()) { 
+                    alert("That ID exists please choose another one.")
+                }
+                // ( ) for stament 
+                else{  
+                set(ref(db, "People/"+ enterID.value),{
                 Name: enterName.value,
-                ID: enterID.value,
-               
+                ID: enterID.value
             })
             .then(()=>{
                 alert("Your account has been created! Welcome to Cosmic Crusade");
@@ -165,6 +176,10 @@
             .catch((error)=>{
                 alert(error);
             });
+
+                } 
+            
+            })
 
         
         }
