@@ -10,7 +10,7 @@ function jump() {
   }
   
   document.addEventListener('keydown', (event) => {
-    if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation')) {
+    if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation') || event.code == 'Space' && !ship.classList.contains('jump-animation')) {
       jump();
     }
   });
@@ -20,16 +20,17 @@ function jump() {
       .getPropertyValue('top'));
     const rockLeft = parseInt(window.getComputedStyle(rock)
       .getPropertyValue('left'));
-    score.innerText++;
+    
   
     if (rockLeft < 1) {
       rock.style.display = 'none';
+      score.innerText++;
     } else {
       rock.style.display = ''
     }
   
     if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
-      alert("You got a score of: " + score.innerText +
+      alert("Your score is: " + score.innerText +
         " replay?");
       location.reload();
     }

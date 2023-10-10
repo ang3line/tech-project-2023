@@ -12,7 +12,7 @@ body {background-color: #042848;
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); 
         -ms-transform: translate(-50%, -50%);
         width: 800px;
         height: 300px;
@@ -38,6 +38,7 @@ body {background-color: #042848;
         top: 250px;
         background-image: url("rock.png");
         background-size: cover;
+        animation: rock 1.33s infinite linear;
       }
 
       

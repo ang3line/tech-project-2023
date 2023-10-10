@@ -36,7 +36,7 @@ body {background-color: #042848;
         left: 550px;
         background-image: url("rock.png");
         background-size: cover;
-        animation: rock 1.33s infinite;
+        animation: rock 1.33s infinite linear;
       }
       
       @keyframes rock {
