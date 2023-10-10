@@ -8,7 +8,17 @@
     <title>Document</title>
 </head>
 <body>
+
+        
+
     <br> <br> <br> 
+    <div id="database">
+        <input id="idInput" placeholder="enter id">
+        <br><br>
+        <input id="usernameInput" placeholder="enter username">
+        <br><br>
+        <button id="startBtn">Start</button>
+    </div>
     <div id="game"> 
         <div id="ship"> </div>
         <div id="rock"> </div>
@@ -18,8 +28,8 @@
 
 
    <script type=module> 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
@@ -54,40 +64,112 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebas
 const ship = document.getElementById('ship');
 const rock = document.getElementById('rock');
 const score = document.getElementById('score');
+const game = document.getElementById('game')
 // Const for varibles for defining objects and things that won't be changed . 
+
+
+var startBtn = document.getElementById('startBtn');
+var idInput = document.getElementById('idInput');
+var usernameInput= document.getElementById('usernameInput');
+
+ship.style.display = 'none';
+rock.style.display = 'none';
+score.style.display = 'none';
+game.style.display = 'none';
+
+
+startBtn.addEventListener('click', start);
+
+function test() {
+    const dbref = ref(db);
+
+    get(child(dbref, "People/" + idInput.value)) 
+            .then((snapshot)=>{
+                if(snapshot.exists() && usernameInput.value == snapshot.val().Name){ // if the id exists and the name matches, then you can start!
+                    console.log("worked")
+                    
+                } else {
+                    alert("No data found");
+                }
+            })
+}
+
+
+function start() {
+    const dbref = ref(db);
+
+    get(child(dbref, "People/" + idInput.value)) 
+            .then((snapshot)=>{
+                if(snapshot.exists() && usernameInput.value == snapshot.val().Name){ // if the id exists and the name matches, then you can start!
+                    startBtn.style.display = 'none';
+                    idInput.style.display = 'none';
+                    usernameInput.style.display = 'none';
+
+                    rock.style.display = '';
+                    ship.style.display = '';
+                    score.style.display = '';
+                    game.style.display = '';
+                
+
+                    setInterval(() => {
+                        const shipTop = parseInt(window.getComputedStyle(ship)
+                        .getPropertyValue('top'));
+                        const rockLeft = parseInt(window.getComputedStyle(rock)
+                        .getPropertyValue('left'));
+                        
+
+                        if (rockLeft < 1) {
+                            rock.style.display = 'none';
+                            score.innerText++;
+                        } else {
+                            rock.style.display = ''
+                        }
+
+                        if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
+                            if ((snapshot.val().Highscore < score)) {
+                                update(ref(db, "People/" + idInput.value), {
+                                    Highscore: score.innerText
+                                    // instead of "score" it's "score.innerText"
+                                })
+                                alert("Your score is: " + score.innerText +
+                                " replay?");
+                            location.reload();
+                            } else {
+                                alert("Your score is: " + score.innerText +
+                                    " replay?");
+                                location.reload();
+                            }
+                        }
+                    }, 50);
+
+
+                    document.addEventListener('keydown', (event) => {
+                        if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation') || event.code == 'Space' && !ship.classList.contains('jump-animation')) {
+                        jump();
+                        }
+                    });
+                    
+                } else {
+                    alert("No data found");
+                }
+            })
+    
+
+}
+
+
+
 
 function jump() {
     ship.classList.add("jump-animation");
     setTimeout(() =>
-      ship.classList.remove("jump-animation"), 500);
-  }
-  
-  document.addEventListener('keydown', (event) => {
-    if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation') || event.code == 'Space' && !ship.classList.contains('jump-animation')) {
-      jump();
-    }
-  });
-  
-  setInterval(() => {
-    const shipTop = parseInt(window.getComputedStyle(ship)
-      .getPropertyValue('top'));
-    const rockLeft = parseInt(window.getComputedStyle(rock)
-      .getPropertyValue('left'));
-    
-  
-    if (rockLeft < 1) {
-      rock.style.display = 'none';
-      score.innerText++;
-    } else {
-      rock.style.display = ''
-    }
-  
-    if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
-      alert("Your score is: " + score.innerText +
-        " replay?");
-      location.reload();
-    }
-  }, 50);
+    ship.classList.remove("jump-animation"), 500);
+}
+
+
+
+
+
 
 </script> 
 

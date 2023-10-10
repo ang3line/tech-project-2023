@@ -168,7 +168,8 @@
                 else{  
                 set(ref(db, "People/"+ enterID.value),{
                 Name: enterName.value,
-                ID: enterID.value
+                ID: enterID.value,
+                Highscore: ""
             })
             .then(()=>{
                 alert("Your account has been created! Welcome to Cosmic Crusade");

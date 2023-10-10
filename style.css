@@ -5,6 +5,9 @@ body {background-color: #042848;
         text-align: center;
         
     }
+    #database{
+      text-align: center;
+    }
     #game {
         position: absolute;
         top: 50%;
