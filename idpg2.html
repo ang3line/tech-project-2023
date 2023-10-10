@@ -107,10 +107,11 @@
         <input id="findID" type="text"> <br><br>
         <button id="find" class="btn">find</button>
         <h3 id="findName" type="text"></h3>
+        <h3 id="findHighscore" type="text"></h3>
         
     </div>
 
-    <video autoplay muted loop id="myVideo" width="1000" height="30">
+    <video autoplay muted loop id="myVideo" width="1000" height="300">
         <source src="stars.mp4" type="video/mp4">
     </video>
 
@@ -191,7 +192,8 @@
             get(child(dbref, "People/" + findID.value))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    findName.innerHTML = "Name: " + snapshot.val().Name;
+                    findName.innerHTML = "Name: " + snapshot.val ().Name;
+                    findHighscore.innerHTML = "Highscore: " + snapshot.val (). Highscore;
                     
                 } else {
                     alert("No data found");
