@@ -11,7 +11,10 @@
 
         
 
-    <br> <br> <br> 
+    <br> <br>  
+
+    <h1 id="h1"> sign in </h1>
+
     <div id="database">
         <input id="idInput" placeholder="enter id">
         <br><br>
@@ -25,6 +28,12 @@
     </div>
 
    <h1 id="score">0</h1>
+
+   <video autoplay muted loop id="myVideo" width="1000" height="300">
+    <source src="stars.mp4" type="video/mp4">
+</video>
+
+
 
 
    <script type=module> 
@@ -126,10 +135,10 @@ function start() {
                         }
 
                         if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
-                            if ((snapshot.val().Highscore < score)) {
+                            if ((snapshot.val().Highscore > score)) {
                                 update(ref(db, "People/" + idInput.value), {
                                     Highscore: score.innerText
-                                    // instead of "score" it's "score.innerText"
+                                    
                                 })
                                 alert("Your score is: " + score.innerText +
                                 " replay?");

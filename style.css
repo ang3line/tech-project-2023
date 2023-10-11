@@ -8,6 +8,52 @@ body {background-color: #042848;
     #database{
       text-align: center;
     }
+
+    #myVideo {
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #idInput { 
+      margin-top: 20px;
+      width: 60mm;
+      height: 6mm;
+      border: 4px solid #ffffff;
+      border-radius: 30px;
+      color: #395f81;
+      font-size: 15px;
+  }
+
+  ::placeholder {
+    color: #5c768d;
+  opacity: 1;
+  text-align: center;
+  
+  padding: 5px;
+
+}
+
+#h1 { 
+  text-align: center;
+  
+}
+
+  #usernameInput{ 
+    margin-top: 20px;
+    width: 60mm;
+    height: 6mm;
+    border: 4px solid #ffffff;
+    border-radius: 30px;
+    color: #395f81;
+    font-size: 15px;
+
+  }
     #game {
         position: absolute;
         top: 50%;
