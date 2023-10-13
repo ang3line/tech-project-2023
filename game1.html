@@ -19,7 +19,7 @@
         <input id="idInput" placeholder="enter id">
         <br><br>
         <input id="usernameInput" placeholder="enter username">
-        <br><br>
+        <br><br><br>
         <button id="startBtn">Start</button>
     </div>
     <div id="game"> 
@@ -80,6 +80,7 @@ const game = document.getElementById('game')
 var startBtn = document.getElementById('startBtn');
 var idInput = document.getElementById('idInput');
 var usernameInput= document.getElementById('usernameInput');
+var signIn = document.getElementById('h1')
 
 ship.style.display = 'none';
 rock.style.display = 'none';
@@ -113,6 +114,7 @@ function start() {
                     startBtn.style.display = 'none';
                     idInput.style.display = 'none';
                     usernameInput.style.display = 'none';
+                    h1.style.display = 'none';
 
                     rock.style.display = '';
                     ship.style.display = '';
@@ -135,7 +137,7 @@ function start() {
                         }
 
                         if (rockLeft < 50 && rockLeft > 0 && shipTop > 150) {
-                            if ((snapshot.val().Highscore > score)) {
+                            if ((snapshot.val().Highscore < score)) {
                                 update(ref(db, "People/" + idInput.value), {
                                     Highscore: score.innerText
                                     
@@ -150,7 +152,6 @@ function start() {
                             }
                         }
                     }, 50);
-
 
                     document.addEventListener('keydown', (event) => {
                         if (event.code == 'ArrowUp' && !ship.classList.contains('jump-animation') || event.code == 'Space' && !ship.classList.contains('jump-animation')) {
